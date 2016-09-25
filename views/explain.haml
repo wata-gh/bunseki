@@ -1,0 +1,68 @@
+%h2.ui.header sql
+
+.ui.segments
+  .ui.secondary.segment= @sql[:caller]
+  %pre.ui.segment= @sql[:sql_text]
+  .ui.secondary.segment= "#{(@sql[:duration] * 1000).round(3)}ms"
+
+%h2.ui.header explain
+
+%table.ui.celled.table
+  %thead
+    %tr
+      %th id
+      %th select_type
+      %th table
+      %th type
+      %th possible_keys
+      %th key
+      %th ken_len
+      %th ref
+      %th rows
+      %th Extra
+  %tbody
+    - @stats.each do |stat|
+      %tr
+        %td= stat[:id]
+        %td= stat[:select_type]
+        %td= stat[:table]
+        %td= stat[:type]
+        %td= stat[:possible_keys]
+        %td= stat[:key]
+        %td= stat[:key_len]
+        %td= stat[:ref]
+        %td= stat[:rows]
+        %td= stat[:Extra]
+
+%h2.ui.header results
+
+- if @results.length == 0
+- else
+  %table.ui.celled.table
+    %thead
+      %tr
+        - @results[0].keys.each do |column|
+          %th= column
+    %tbody
+      - @results.each do |result|
+        %tr
+          - result.values.each do |v|
+            %td= v
+    %tfoot
+      %tr
+        %th{colspan: @results[0].keys.length}= "#{@results.length} rows"
+
+%h2.ui.header profile
+
+- if @profile.length == 0
+- else
+  %table.ui.celled.table
+    %thead
+      %tr
+        - @profile[0].keys.each do |column|
+          %th= column
+    %tbody
+      - @profile.each do |result|
+        %tr
+          - result.values.each do |v|
+            %td= v

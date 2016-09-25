@@ -1,0 +1,2 @@
+- @sessions.each do |session|
+  = session

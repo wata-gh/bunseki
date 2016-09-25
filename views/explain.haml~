@@ -1,0 +1,28 @@
+%h2.ui.header explain
+
+%table.ui.celled.table
+  %thead
+    %tr
+      %th id
+      %th select_type
+      %th table
+      %th type
+      %th possible_keys
+      %th key
+      %th ken_len
+      %th ref
+      %th rows
+      %th Extra
+  %tbody
+    - @stats.each do |stat|
+      %tr
+        %td= log[:id]
+        %td= log[:select_type]
+        %td= log[:table]
+        %td= log[:type]
+        %td= log[:possible_keys]
+        %td= log[:key]
+        %td= log[:key_len]
+        %td= log[:ref]
+        %td= log[:rows]
+        %td= log[:Extra]

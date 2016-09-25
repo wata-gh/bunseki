@@ -1,0 +1,4 @@
+%h2.ui.header sessions
+
+- @sessions.each.with_index do |session, idx|
+  %a{href: "/?session=#{URI.escape(session)}"}= "#{idx + 1} #{session}"

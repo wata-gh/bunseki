@@ -1,0 +1,3 @@
+%html
+  %head
+    %link{rel: 'stylesheet', type: 'text/css', href: 'css/semantic/dist/semantic.min.css'}
