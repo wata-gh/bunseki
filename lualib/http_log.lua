@@ -38,8 +38,8 @@ local normalized_path = route.normalize(ngx.req.get_method(), ngx.var.uri)
 local req_body = ngx.req.get_body_data() == nil and "" or ngx.req.get_body_data()
 local sql = "insert into raw_http_logs (hostname, requested_at, request_id, method, normalized_path, path, http_version, req_header, req_body, status, res_header, res_body, res_time) values ("
   .. "  \'" .. os.getenv("HTTP_LOG_HOSTNAME") .. "\'" -- hostname
-  .. "  \'" .. os.time() .. "\'"                      -- requested_at
-  .. "  \'" .. ngx.var.request_id .. "\'"             -- request_id
+  .. ", FROM_UNIXTIME(\'" .. os.time() .. "\')"       -- requested_at
+  .. ", \'" .. ngx.var.request_id .. "\'"             -- request_id
   .. ", \'" .. ngx.req.get_method() .. "\'"           -- method
   .. ", \'" .. normalized_path .. "\'"                -- normalized_path
   .. ", \'" .. ngx.var.uri .. "\'"                    -- path

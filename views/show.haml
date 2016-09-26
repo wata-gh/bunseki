@@ -10,6 +10,12 @@
 %table.ui.celled.very.compact.collapsing.table
   %tbody
     %tr
+      %th hostname
+      %td= @log[:hostname]
+    %tr
+      %th requested at
+      %td= @log[:requested_at]
+    %tr
       %th request id
       %td= @log[:request_id]
     %tr
