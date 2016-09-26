@@ -31,6 +31,8 @@
   %thead
     %tr
       %th id
+      %th hostname
+      %th requested_at
       %th request_id
       %th method
       %th normalized path
@@ -44,6 +46,8 @@
       %tr{class: log[:status] == 404 ? 'negative' : ''}
         %td
           %a{href: url("/#{log[:id]}")}= log[:id]
+        %td= log[:hostname]
+        %td= log[:requested_at]
         %td
           %a{href: url("/requests/#{log[:request_id]}")}= log[:request_id]
         %td= log[:method]
