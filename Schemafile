@@ -1,16 +1,18 @@
 create_table "raw_http_logs", force: :cascade do |t|
-  t.string  "request_id",      limit: 64
-  t.string  "method",          limit: 10
-  t.text    "normalized_path", limit: 65535
-  t.text    "path",            limit: 65535
-  t.string  "http_version",    limit: 20
-  t.text    "req_header",      limit: 16777215
-  t.text    "req_body",        limit: 16777215
-  t.integer "status",          limit: 4
-  t.text    "res_header",      limit: 16777215
-  t.text    "res_body",        limit: 16777215
-  t.string  "type",            limit: 20
-  t.float   "res_time",        limit: 24
+  t.string   "hostname",        limit: 32
+  t.datetime "requested_at"
+  t.string   "request_id",      limit: 64
+  t.string   "method",          limit: 10
+  t.text     "normalized_path", limit: 65535
+  t.text     "path",            limit: 65535
+  t.string   "http_version",    limit: 20
+  t.text     "req_header",      limit: 16777215
+  t.text     "req_body",        limit: 16777215
+  t.integer  "status",          limit: 4
+  t.text     "res_header",      limit: 16777215
+  t.text     "res_body",        limit: 16777215
+  t.string   "type",            limit: 20
+  t.float    "res_time",        limit: 24
 end
 
 add_index "raw_http_logs", ["type", "method"], name: "type_method", using: :btree
