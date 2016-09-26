@@ -1,4 +1,4 @@
-%a{href: "/"} clear
+%a{href: url('/')} clear
 
 %h2.ui.header summary
 
@@ -18,7 +18,7 @@
       %tr
         %td= idx + 1
         %td
-          %a{href: "?normalized_path=#{log[:normalized_path]}"}= log[:normalized_path]
+          %a{href: url("/?normalized_path=#{log[:normalized_path]}")}= log[:normalized_path]
         %td= log[:count]
         %td= "#{(log[:sum_res_time] * 1000).round(2)} (#{(log[:sum_res_time] / total * 100).round(2)}%)"
         %td= (log[:ave_res_time] * 1000).round(2)
@@ -43,9 +43,9 @@
     - @logs.each do |log|
       %tr{class: log[:status] == 404 ? 'negative' : ''}
         %td
-          %a{href: "/#{log[:id]}"}= log[:id]
+          %a{href: url("/#{log[:id]}")}= log[:id]
         %td
-          %a{href: "/requests/#{log[:request_id]}"}= log[:request_id]
+          %a{href: url("/requests/#{log[:request_id]}")}= log[:request_id]
         %td= log[:method]
         %td= log[:normalized_path]
         %td= log[:path]
@@ -61,13 +61,13 @@
           - start = [1, current - 3].max
           - last = [(@count / 20.0).ceil, current + 3].min
           - if current != 1
-            %a.icon.item{href: "?page=#{current - 1}&#{@cond}"}
+            %a.icon.item{href: url("/?page=#{current - 1}&#{@cond}")}
               %i.left.chevron.icon
           - (start..last).each do |i|
             - if i == current
-              %a.item.active{href: "?page=#{i}&#{@cond}"}= i
+              %a.item.active{href: url("/?page=#{i}&#{@cond}")}= i
             - else
-              %a.item{href: "?page=#{i}&#{@cond}"}= i
+              %a.item{href: url("/?page=#{i}&#{@cond}")}= i
           - if current != last
-            %a.icon.item{href: "?page=#{current + 1}&#{@cond}"}
+            %a.icon.item{href: url("/?page=#{current + 1}&#{@cond}")}
               %i.right.chevron.icon
