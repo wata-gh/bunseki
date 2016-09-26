@@ -1,4 +1,4 @@
-%a{href: '/'} return
+%a{href: url('/')} return
 - res_time = (@log[:res_time] * 1000).round(2)
 - sql_time = (@sqls.inject(0) {|t, s| t + s[:duration]} * 1000).round(2)
 - sel_count = @sqls.map {|s| s[:sql_text]}.count {|s| s.strip.downcase.start_with?('select')}
@@ -18,11 +18,11 @@
     %tr
       %th normalized path
       %td
-        %a{href: "/?normalized_path=#{@log[:normalized_path]}"}= @log[:normalized_path]
+        %a{href: url("/?normalized_path=#{@log[:normalized_path]}")}= @log[:normalized_path]
     %tr
       %th path
       %td
-        %a{href: "/?path=#{@log[:path]}"}= @log[:path]
+        %a{href: url("/?path=#{@log[:path]}")}= @log[:path]
     %tr
       %th response time
       %td= "#{res_time}ms"
@@ -64,5 +64,5 @@
         %td= (sql[:duration] * 1000).round(3)
         %td= sql[:caller]
         %td
-          %a{href: "/explain/#{sql[:id]}"}= 'explain'
+          %a{href: url("/explain/#{sql[:id]}")}= 'explain'
           = sql[:sql_text]
