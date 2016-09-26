@@ -67,6 +67,10 @@ SQL
     end
   end
 
+  before do
+    request.script_name = ENV['SCRIPT_NAME']
+  end
+
   get '/' do
     page = params[:page].to_i
     page = 1 if page == 0
