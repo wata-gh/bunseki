@@ -115,7 +115,7 @@ SQL
   get '/requests/:request_id' do
     log = db.xquery('select id from raw_http_logs where request_id = ?', params['request_id']).first
     halt 404 unless log
-    redirect "/#{log[:id]}", 303
+    redirect to "/#{log[:id]}", 303
   end
 
   get '/sessions/' do
