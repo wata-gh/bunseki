@@ -2,6 +2,19 @@
 
 %h2.ui.header summary
 
+- total_count = @host_summary.map {|l| l[:count]}.inject(:+)
+%table.ui.celled.collapsing.table
+  %thead
+    %tr
+      %th hostname
+      %th count
+  %tbody
+    - @host_summary.each do |log|
+      %tr
+        %td
+          %a{href: url("/?hostname=#{log[:hostname]}")}= log[:hostname]
+        %td= "#{log[:count]}(#{(log[:count] / total_count * 100).round(2)}%)"
+
 - total = @summary.map {|l| l[:sum_res_time]}.inject(:+)
 %table.ui.celled.collapsing.table
   %thead
