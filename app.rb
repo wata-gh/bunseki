@@ -76,7 +76,7 @@ SQL
     page = 1 if page == 0
     per = 20
     cond = params.select do |k, _|
-      %w/method normalized_path path http_version status type session/.include? k
+      %w/method hostname normalized_path path http_version status type session/.include? k
     end
     where = build_where(cond)
 
@@ -92,6 +92,16 @@ SQL
       group by normalized_path
     SQL
     @summary = db.xquery(query)
+
+    query = <<-SQL
+      select
+        hostname
+        , count(1) as count
+      from raw_http_logs #{where}
+      group by hostname
+      order by hostname
+    SQL
+    @host_summary = db.xquery(query)
 
     query = <<-SQL
       select * from raw_http_logs #{where} order by id desc limit #{(page - 1) * per}, #{per}
