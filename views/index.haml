@@ -59,7 +59,7 @@
         %td= "#{(log[:res_time] * 1000).round(2)}ms"
   %tfoot
     %tr
-      %th{colspan: 9}
+      %th{colspan: 11}
         .ui.right.floated.pagination.menu
           - current = params[:page].to_i == 0 ? 1 : params[:page].to_i
           - start = [1, current - 3].max
